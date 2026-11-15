@@ -1,0 +1,279 @@
+package net.krypton.client.module;
+
+import java.util.List;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.krypton.client.module.impl.client.HotkeysModule;
+import net.krypton.client.module.impl.client.HudModule;
+import net.krypton.client.module.impl.client.PerformanceModule;
+import net.krypton.client.module.impl.client.RadarModule;
+import net.krypton.client.module.impl.client.RegionMapModule;
+import net.krypton.client.module.impl.client.SpotifyHudModule;
+import net.krypton.client.module.impl.combat.AimAssistModule;
+import net.krypton.client.module.impl.combat.AnchorAuraModule;
+import net.krypton.client.module.impl.combat.AutoCityModule;
+import net.krypton.client.module.impl.combat.AutoInvTotemModule;
+import net.krypton.client.module.impl.combat.AutoTotemModule;
+import net.krypton.client.module.impl.combat.CrystalAuraModule;
+import net.krypton.client.module.impl.combat.CrystalMacroModule;
+import net.krypton.client.module.impl.combat.CrystalOptimizerModule;
+import net.krypton.client.module.impl.combat.FastXpModule;
+import net.krypton.client.module.impl.combat.FriendGuardModule;
+import net.krypton.client.module.impl.combat.HoverTotemModule;
+import net.krypton.client.module.impl.combat.JumpResetModule;
+import net.krypton.client.module.impl.combat.KeyThrowModule;
+import net.krypton.client.module.impl.combat.KillAuraModule;
+import net.krypton.client.module.impl.combat.MaceModule;
+import net.krypton.client.module.impl.combat.ShieldBreakerModule;
+import net.krypton.client.module.impl.combat.SingleAnchorMacroModule;
+import net.krypton.client.module.impl.combat.SpearLungeModule;
+import net.krypton.client.module.impl.combat.TriggerbotModule;
+import net.krypton.client.module.impl.combat.WTapRecodeModule;
+import net.krypton.client.module.impl.donutmacros.AhSellModule;
+import net.krypton.client.module.impl.donutmacros.AhSniperModule;
+import net.krypton.client.module.impl.donutmacros.AutoSellModule;
+import net.krypton.client.module.impl.donutmacros.AutoTpaHereModule;
+import net.krypton.client.module.impl.donutmacros.OrderAhSellerModule;
+import net.krypton.client.module.impl.donutmacros.OrderDropperModule;
+import net.krypton.client.module.impl.donutmacros.PanicPayModule;
+import net.krypton.client.module.impl.donutmacros.TpMacroModule;
+import net.krypton.client.module.impl.misc.AirStuckModule;
+import net.krypton.client.module.impl.misc.AmethystBypassModule;
+import net.krypton.client.module.impl.misc.AntiTrapModule;
+import net.krypton.client.module.impl.misc.AntiVanishModule;
+import net.krypton.client.module.impl.misc.AutoClickerModule;
+import net.krypton.client.module.impl.misc.AutoEatModule;
+import net.krypton.client.module.impl.misc.AutoReconnectModule;
+import net.krypton.client.module.impl.misc.AutoRelogModule;
+import net.krypton.client.module.impl.misc.AutoReplenishModule;
+import net.krypton.client.module.impl.misc.BlockNotifierModule;
+import net.krypton.client.module.impl.misc.ChatMacroModule;
+import net.krypton.client.module.impl.misc.CoordSnapperModule;
+import net.krypton.client.module.impl.misc.DiscordPresenceModule;
+import net.krypton.client.module.impl.misc.DonutNoFallModule;
+import net.krypton.client.module.impl.misc.FakeStats;
+import net.krypton.client.module.impl.misc.FastUseModule;
+import net.krypton.client.module.impl.misc.FreecamModule;
+import net.krypton.client.module.impl.misc.HomeMetaModule;
+import net.krypton.client.module.impl.misc.LegitAutoToolModule;
+import net.krypton.client.module.impl.misc.NameProtectModule;
+import net.krypton.client.module.impl.misc.NetheriteFinderModule;
+import net.krypton.client.module.impl.misc.NoInvLeakModule;
+import net.krypton.client.module.impl.misc.PlayerBypass2Module;
+import net.krypton.client.module.impl.misc.PlayerBypassModule;
+import net.krypton.client.module.impl.misc.PlayerDetectionModule;
+import net.krypton.client.module.impl.misc.QuantumModule;
+import net.krypton.client.module.impl.misc.RenderDistanceToggleModule;
+import net.krypton.client.module.impl.misc.SkinChangeModule;
+import net.krypton.client.module.impl.misc.SlowSwingModule;
+import net.krypton.client.module.impl.misc.SpamModule;
+import net.krypton.client.module.impl.misc.SpawnerProtectModule;
+import net.krypton.client.module.impl.misc.SpeedMineModule;
+import net.krypton.client.module.impl.misc.StaffListModule;
+import net.krypton.client.module.impl.misc.TridentUtilModule;
+import net.krypton.client.module.impl.misc.WeatherNotifierModule;
+import net.krypton.client.module.impl.movement.AutoJumpModule;
+import net.krypton.client.module.impl.movement.AutoWalkModule;
+import net.krypton.client.module.impl.movement.BoatFlyModule;
+import net.krypton.client.module.impl.movement.BoatNoclipModule;
+import net.krypton.client.module.impl.movement.ClickTpModule;
+import net.krypton.client.module.impl.movement.ElytraFlyModule;
+import net.krypton.client.module.impl.movement.ElytraSwapModule;
+import net.krypton.client.module.impl.movement.EntityControlModule;
+import net.krypton.client.module.impl.movement.EntitySpeedModule;
+import net.krypton.client.module.impl.movement.FlyModule;
+import net.krypton.client.module.impl.movement.JesusModule;
+import net.krypton.client.module.impl.movement.NoJumpDelayModule;
+import net.krypton.client.module.impl.movement.SneakModule;
+import net.krypton.client.module.impl.movement.SpeedModule;
+import net.krypton.client.module.impl.movement.SpiderModule;
+import net.krypton.client.module.impl.movement.SprintModule;
+import net.krypton.client.module.impl.movement.TridentBoostModule;
+import net.krypton.client.module.impl.render.AtmosphereModule;
+import net.krypton.client.module.impl.render.BlockEntityDebugModule;
+import net.krypton.client.module.impl.render.BlockEspModule;
+import net.krypton.client.module.impl.render.BlockOverlayModule;
+import net.krypton.client.module.impl.render.ChunkScannerModule;
+import net.krypton.client.module.impl.render.ColorGradingModule;
+import net.krypton.client.module.impl.render.CustomCrosshairModule;
+import net.krypton.client.module.impl.render.CustomFovModule;
+import net.krypton.client.module.impl.render.CustomGlintModule;
+import net.krypton.client.module.impl.render.EspModule;
+import net.krypton.client.module.impl.render.FloatingRelicsModule;
+import net.krypton.client.module.impl.render.FreelookModule;
+import net.krypton.client.module.impl.render.FullbrightModule;
+import net.krypton.client.module.impl.render.HandAuraModule;
+import net.krypton.client.module.impl.render.HandModelModule;
+import net.krypton.client.module.impl.render.HandsModule;
+import net.krypton.client.module.impl.render.HitParticlesModule;
+import net.krypton.client.module.impl.render.HoleEspModule;
+import net.krypton.client.module.impl.render.ItemEspModule;
+import net.krypton.client.module.impl.render.JumpCirclesModule;
+import net.krypton.client.module.impl.render.LightEspModule;
+import net.krypton.client.module.impl.render.LowHealthWarningModule;
+import net.krypton.client.module.impl.render.MotionBlurModule;
+import net.krypton.client.module.impl.render.NametagsModule;
+import net.krypton.client.module.impl.render.NoRenderModule;
+import net.krypton.client.module.impl.render.PearlTrajectoryModule;
+import net.krypton.client.module.impl.render.PharaohHeaddressModule;
+import net.krypton.client.module.impl.render.PrimeChunkFinderModule;
+import net.krypton.client.module.impl.render.RelicParticlesModule;
+import net.krypton.client.module.impl.render.ShaderEspModule;
+import net.krypton.client.module.impl.render.SpawnerNametagsModule;
+import net.krypton.client.module.impl.render.SpawnerNotifierModule;
+import net.krypton.client.module.impl.render.StorageEspModule;
+import net.krypton.client.module.impl.render.SusChunkFinderModule;
+import net.krypton.client.module.impl.render.SwingAnimationModule;
+import net.krypton.client.module.impl.render.TargetEspModule;
+import net.krypton.client.module.impl.render.TimeChangerModule;
+import net.krypton.client.module.impl.render.TotemSpiritModule;
+import net.krypton.client.module.impl.render.TracersModule;
+import net.krypton.client.module.impl.render.TrajectoriesModule;
+import net.krypton.client.module.impl.render.WeaponInspectModule;
+import net.krypton.client.module.impl.render.XrayModule;
+import net.krypton.client.module.impl.render.ZoomModule;
+import net.krypton.client.module.impl.render.character.CharacterModule;
+
+@Environment(EnvType.CLIENT)
+public final class BuiltinModuleProvider implements ModuleProvider {
+   @Override
+   public String id() {
+      return "builtin";
+   }
+
+   @Override
+   public List<ClientModule> createModules() {
+      return List.of(
+         new AimAssistModule(),
+         new SingleAnchorMacroModule(),
+         new AnchorAuraModule(),
+         new CrystalMacroModule(),
+         new CrystalAuraModule(),
+         new AutoCityModule(),
+         new TriggerbotModule(),
+         new KillAuraModule(),
+         new ShieldBreakerModule(),
+         new MaceModule(),
+         new HoverTotemModule(),
+         new FastXpModule(),
+         new AutoTotemModule(),
+         new AutoInvTotemModule(),
+         new WTapRecodeModule(),
+         new CrystalOptimizerModule(),
+         new FriendGuardModule(),
+         new SpearLungeModule(),
+         new JumpResetModule(),
+         new KeyThrowModule(),
+         new LegitAutoToolModule(),
+         new AutoClickerModule(),
+         new FastUseModule(),
+         new AutoEatModule(),
+         new AutoReplenishModule(),
+         new AutoReconnectModule(),
+         new AntiVanishModule(),
+         new PlayerDetectionModule(),
+         new AutoRelogModule(),
+         new AntiTrapModule(),
+         new AirStuckModule(),
+         new SpawnerProtectModule(),
+         new StaffListModule(),
+         new PlayerBypassModule(),
+         new PlayerBypass2Module(),
+         new NetheriteFinderModule(),
+         new RenderDistanceToggleModule(),
+         new HomeMetaModule(),
+         new TridentUtilModule(),
+         new QuantumModule(),
+         new DonutNoFallModule(),
+         new SpeedMineModule(),
+         new AmethystBypassModule(),
+         new FreecamModule(),
+         new SpamModule(),
+         new CoordSnapperModule(),
+         new ChatMacroModule(),
+         new NameProtectModule(),
+         new NoInvLeakModule(),
+         new FakeStats(),
+         new WeatherNotifierModule(),
+         new BlockNotifierModule(),
+         new FlyModule(),
+         new AutoWalkModule(),
+         new AutoJumpModule(),
+         new ClickTpModule(),
+         new BoatFlyModule(),
+         new BoatNoclipModule(),
+         new ElytraFlyModule(),
+         new ElytraSwapModule(),
+         new EntityControlModule(),
+         new EntitySpeedModule(),
+         new JesusModule(),
+         new SneakModule(),
+         new SpeedModule(),
+         new SpiderModule(),
+         new SprintModule(),
+         new NoJumpDelayModule(),
+         new TridentBoostModule(),
+         new SlowSwingModule(),
+         new SwingAnimationModule(),
+         new WeaponInspectModule(),
+         new HandModelModule(),
+         new HandsModule(),
+         new HandAuraModule(),
+         new SkinChangeModule(),
+         new SpawnerNotifierModule(),
+         new SusChunkFinderModule(),
+         new ChunkScannerModule(),
+         new PrimeChunkFinderModule(),
+         new BlockEntityDebugModule(),
+         new LightEspModule(),
+         new FullbrightModule(),
+         new EspModule(),
+         new ShaderEspModule(),
+         new NametagsModule(),
+         new SpawnerNametagsModule(),
+         new BlockEspModule(),
+         new BlockOverlayModule(),
+         new StorageEspModule(),
+         new FreelookModule(),
+         new HoleEspModule(),
+         new PearlTrajectoryModule(),
+         new TrajectoriesModule(),
+         new ItemEspModule(),
+         new XrayModule(),
+         new NoRenderModule(),
+         new CustomFovModule(),
+         new ZoomModule(),
+         new CustomCrosshairModule(),
+         new CustomGlintModule(),
+         new HitParticlesModule(),
+         new TargetEspModule(),
+         new TotemSpiritModule(),
+         new RelicParticlesModule(),
+         new MotionBlurModule(),
+         new AtmosphereModule(),
+         new ColorGradingModule(),
+         new JumpCirclesModule(),
+         new PharaohHeaddressModule(),
+         new CharacterModule(),
+         new FloatingRelicsModule(),
+         new TimeChangerModule(),
+         new LowHealthWarningModule(),
+         new HudModule(),
+         new SpotifyHudModule(),
+         new RegionMapModule(),
+         new RadarModule(),
+         new HotkeysModule(),
+         new TracersModule(),
+         new PerformanceModule(),
+         new DiscordPresenceModule(),
+         new AutoTpaHereModule(),
+         new OrderAhSellerModule(),
+         new AhSellModule(),
+         new AutoSellModule(),
+         new TpMacroModule(),
+         new OrderDropperModule(),
+         new PanicPayModule(),
+         new AhSniperModule()
+      );
+   }
+}

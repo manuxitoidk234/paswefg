@@ -1,0 +1,7 @@
+{
+  "spawner_notify": {
+    "sounds": [
+      "krypton:spawner_notify"
+    ]
+  }
+}
